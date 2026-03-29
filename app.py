@@ -3,11 +3,29 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-st.set_page_config(page_title="Coração Pulsando", layout="centered")
+# Configuração da página
+st.set_page_config(page_title="Para você 💜", layout="centered")
 
-st.title("❤️ Coração Pulsando")
+# Fundo preto e texto estilizado
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: black;
+    }
+    h1 {
+        color: #d291ff;
+        text-align: center;
+        font-size: 40px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-# Função para desenhar coração
+st.markdown("<h1>Para você meu bem &lt;3</h1>", unsafe_allow_html=True)
+
+# Função do coração
 def heart(t):
     x = 16 * np.sin(t)**3
     y = (
@@ -18,33 +36,40 @@ def heart(t):
     )
     return x, y
 
-# Placeholder para atualizar o gráfico
 placeholder = st.empty()
 
-# Loop de animação
+# Loop de pulsação
 while True:
-    for scale in np.linspace(0.8, 1.2, 10):
+    for scale in np.linspace(0.85, 1.15, 12):
         t = np.linspace(0, 2 * np.pi, 1000)
         x, y = heart(t)
 
         fig, ax = plt.subplots()
-        ax.plot(x * scale, y * scale, color="red", linewidth=3)
+
+        ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
 
         ax.set_aspect('equal')
         ax.axis("off")
 
-        placeholder.pyplot(fig)
-        time.sleep(0.08)
+        fig.patch.set_facecolor('black')
+        ax.set_facecolor('black')
 
-    for scale in np.linspace(1.2, 0.8, 10):
+        placeholder.pyplot(fig)
+        time.sleep(0.07)
+
+    for scale in np.linspace(1.15, 0.85, 12):
         t = np.linspace(0, 2 * np.pi, 1000)
         x, y = heart(t)
 
         fig, ax = plt.subplots()
-        ax.plot(x * scale, y * scale, color="red", linewidth=3)
+
+        ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
 
         ax.set_aspect('equal')
         ax.axis("off")
 
+        fig.patch.set_facecolor('black')
+        ax.set_facecolor('black')
+
         placeholder.pyplot(fig)
-        time.sleep(0.08)
+        time.sleep(0.07)
