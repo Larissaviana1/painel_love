@@ -30,7 +30,6 @@ body {
     background-color: #b266ff;
     position: relative;
     transform: rotate(-45deg);
-    animation: pulse 1s infinite;
 }
 
 /* Partes do coração */
@@ -52,19 +51,6 @@ body {
 .heart::after {
     left: 60px;
     top: 0;
-}
-
-/* Animação */
-@keyframes pulse {
-    0% {
-        transform: scale(1) rotate(-45deg);
-    }
-    50% {
-        transform: scale(1.2) rotate(-45deg);
-    }
-    100% {
-        transform: scale(1) rotate(-45deg);
-    }
 }
 </style>
 
