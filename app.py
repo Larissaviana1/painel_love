@@ -3,9 +3,9 @@ import numpy as np
 import time
 import random
 
-st.set_page_config(page_title="Para você ❤️", layout="centered")
+st.set_page_config(page_title="Para você meu bem ❤️", layout="centered")
 
-st.markdown("<h2 style='text-align:center;'>Para você 💖</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center;'>Para você meu bem 💖</h2>", unsafe_allow_html=True)
 
 placeholder = st.empty()
 
@@ -64,6 +64,6 @@ while True:
 
 # mensagem final (fica antes do loop visual)
 st.markdown(
-    "<h3 style='text-align:center; margin-top:20px;'>Eu te amo 💕</h3>",
+    "<h3 style='text-align:center; margin-top:20px;'>💕Ariel 💕</h3>",
     unsafe_allow_html=True
 )
