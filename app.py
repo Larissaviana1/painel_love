@@ -3,9 +3,7 @@ import numpy as np
 import time
 import random
 
-st.set_page_config(page_title="Para você meu bem ❤️", layout="centered")
-
-st.markdown("<h2 style='text-align:center;'>Para você meu bem 💖</h2>", unsafe_allow_html=True)
+st.set_page_config(page_title="Para você ❤️", layout="centered")
 
 placeholder = st.empty()
 
@@ -34,7 +32,7 @@ for r, c in positions:
     grid[r][c] = random.choice(["❤️", "💖", "💕", "💓"])
 
     html = "<div style='text-align:center; line-height:1;'>"
-    for row in reversed(grid):  # corrigido aqui
+    for row in reversed(grid):
         html += "".join(f"<span style='font-size:16px'>{cell}</span>" for cell in row)
         html += "<br>"
     html += "</div>"
@@ -61,9 +59,3 @@ while True:
 
         placeholder.markdown(html, unsafe_allow_html=True)
         time.sleep(0.25)
-
-# mensagem final (fica antes do loop visual)
-st.markdown(
-    "<h3 style='text-align:center; margin-top:20px;'>💕Ariel 💕</h3>",
-    unsafe_allow_html=True
-)
