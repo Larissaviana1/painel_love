@@ -53,12 +53,14 @@ heart = (X**2 + Y**2 - 1)**3 - X**2 * Y**3 <= 0
 grid = [["⠀" for _ in range(size)] for _ in range(size)]
 
 # ======================
-# 1. CORAÇÃO APARECE DE UMA VEZ
+# 1. CORAÇÃO MAIS CLEAN
 # ======================
 for i in range(size):
     for j in range(size):
         if heart[i][j]:
-            grid[i][j] = random.choice(["❤️", "💖", "💕", "💓"])
+            # controla densidade aqui
+            if random.random() < 0.35:   # ↓ menor valor = menos emojis
+                grid[i][j] = random.choice(["❤️", "💖"])
 
 def render(nome_texto="", scale=1.0):
     html = "<div style='text-align:center; line-height:1;'>"
@@ -73,18 +75,18 @@ def render(nome_texto="", scale=1.0):
     html += "<br>"
 
     if nome_texto:
-        html += f"<div class='neon-green-text' style='font-size:40px; letter-spacing:5px'>{nome_texto}</div>"
+        html += f"<div class='neon-green-text' style='font-size:40px; letter-spacing:6px'>{nome_texto}</div>"
 
     html += "</div>"
 
     placeholder.markdown(html, unsafe_allow_html=True)
 
-# mostrar coração inicial
+# mostrar coração
 render()
 time.sleep(1)
 
 # ======================
-# 2. NOME APARECENDO LETRA POR LETRA
+# 2. NOME ANIMADO
 # ======================
 nome = "ARIEL"
 nome_parcial = ""
@@ -95,7 +97,7 @@ for letra in nome:
     time.sleep(0.4)
 
 # ======================
-# 3. BATIMENTO COM NOME
+# 3. BATIMENTO
 # ======================
 while True:
     for scale in [1.0, 1.18, 1.0]:
