@@ -1,63 +1,61 @@
 import streamlit as st
-import numpy as np
-import matplotlib.pyplot as plt
-import time
+from datetime import datetime
+import base64
 
-st.set_page_config(page_title="Para você 💜", layout="centered")
+# Configuração da página
+st.set_page_config(page_title="Para você ❤️", layout="centered")
 
-# Estilo
-st.markdown(
-    """
+# Fundo com cor suave
+st.markdown("""
     <style>
-    .stApp {
-        background-color: black;
+    body {
+        background-color: #fff0f5;
     }
-    h1 {
-        color: #ff4da6;
-        text-align: center;
-        font-size: 40px;
+    .main {
+        background-color: #fff0f5;
     }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
 
-st.markdown("<h1>Para você meu bem &lt;3</h1>", unsafe_allow_html=True)
+# Título
+st.markdown("<h1 style='text-align: center; color: #ff4b6e;'>💖 Para o amor da minha vida 💖</h1>", unsafe_allow_html=True)
 
-# Função do coração
-def heart(t):
-    x = 16 * np.sin(t)**3
-    y = (
-        13 * np.cos(t)
-        - 5 * np.cos(2 * t)
-        - 2 * np.cos(3 * t)
-        - np.cos(4 * t)
-    )
-    return x, y
+# Mensagem
+st.markdown("""
+<div style='text-align: center; font-size:18px;'>
+Desde que você entrou na minha vida, tudo ficou mais bonito.<br>
+Você é a minha pessoa favorita no mundo inteiro ❤️
+</div>
+""", unsafe_allow_html=True)
 
-placeholder = st.empty()
+st.write("")
 
-t = np.linspace(0, 2 * np.pi, 1000)
+# Contador de tempo juntos
+data_inicio = datetime(2023, 1, 1)  # ALTERA AQUI
+hoje = datetime.now()
+dias = (hoje - data_inicio).days
 
-# Animação contínua com seno (batimento natural)
-frame = 0
+st.markdown(f"<h3 style='text-align:center;'>Estamos juntos há {dias} dias 💕</h3>", unsafe_allow_html=True)
 
-while True:
-    scale = 1 + 0.15 * np.sin(frame)
+st.write("")
 
-    x, y = heart(t)
+# Barra de amor
+st.markdown("### Nível de amor por você:")
+st.progress(100)
 
-    fig, ax = plt.subplots()
+# Fotos
+st.markdown("### Nossos momentos 📸")
+st.image("foto1.jpg", caption="Um dos nossos momentos favoritos")
+st.image("foto2.jpg", caption="Outro dia especial")
 
-    ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
+# Playlist (opcional)
+st.markdown("### Nossa música 🎶")
+st.video("https://www.youtube.com/watch?v=2Vv-BfVoq4g")  # pode trocar
 
-    ax.set_aspect('equal')
-    ax.axis("off")
-
-    fig.patch.set_facecolor('black')
-    ax.set_facecolor('black')
-
-    placeholder.pyplot(fig)
-
-    frame += 0.2
-    time.sleep(0.03)
+# Rodapé
+st.markdown("""
+<hr>
+<div style='text-align:center;'>
+Feito com ❤️ só para você
+</div>
+""", unsafe_allow_html=True)
