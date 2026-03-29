@@ -26,7 +26,9 @@ html, body {
         0 0 40px #ff4d6d;
 }
 
-.neon-green {
+.neon-green-text {
+    color: #39ff14;
+    font-weight: bold;
     text-shadow:
         0 0 5px #39ff14,
         0 0 10px #39ff14,
@@ -58,87 +60,44 @@ for i in range(size):
         if heart[i][j]:
             grid[i][j] = random.choice(["❤️", "💖", "💕", "💓"])
 
-html = "<div style='text-align:center; line-height:1;'>"
-for row in reversed(grid):
-    html += "".join(f"<span class='neon-heart' style='font-size:16px'>{cell}</span>" for cell in row)
-    html += "<br>"
-html += "</div>"
-
-placeholder.markdown(html, unsafe_allow_html=True)
-
-time.sleep(1)
-
-# ======================
-# MATRIZ DO NOME (AJUSTADA)
-# ======================
-letters = {
-    "A": [" 11 ","1  1","1111","1  1","1  1"],
-    "R": ["111 ","1  1","111 ","1 1 ","1  1"],
-    "I": ["111"," 1 "," 1 "," 1 ","111"],
-    "E": ["1111","1   ","111 ","1   ","1111"],
-    "L": ["1   ","1   ","1   ","1   ","1111"]
-}
-
-nome = "ARIEL"
-
-nome_grid = []
-for linha in range(5):
-    row = ""
-    for letra in nome:
-        row += letters[letra][linha] + "  "
-    nome_grid.append(row)
-
-nome_matrix = [list(linha) for linha in nome_grid]
-
-pos_nome = [(i, j) for i in range(len(nome_matrix)) for j in range(len(nome_matrix[0])) if nome_matrix[i][j] == "1"]
-random.shuffle(pos_nome)
-
-nome_display = [["⠀" for _ in range(len(nome_matrix[0]))] for _ in range(len(nome_matrix))]
-
-# ======================
-# 2. NOME APARECENDO
-# ======================
-for r, c in pos_nome:
-    nome_display[r][c] = "💚"
-
+def render(nome_texto="", scale=1.0):
     html = "<div style='text-align:center; line-height:1;'>"
 
     for row in reversed(grid):
-        html += "".join(f"<span class='neon-heart' style='font-size:16px'>{cell}</span>" for cell in row)
+        html += "".join(
+            f"<span class='neon-heart' style='font-size:{int(16*scale)}px'>{cell}</span>"
+            for cell in row
+        )
         html += "<br>"
 
     html += "<br>"
 
-    for row in nome_display:
-        html += "".join(f"<span class='neon-green' style='font-size:18px'>{cell}</span>" for cell in row)
-        html += "<br>"
+    if nome_texto:
+        html += f"<div class='neon-green-text' style='font-size:40px; letter-spacing:5px'>{nome_texto}</div>"
 
     html += "</div>"
 
     placeholder.markdown(html, unsafe_allow_html=True)
-    time.sleep(0.04)
+
+# mostrar coração inicial
+render()
+time.sleep(1)
 
 # ======================
-# 3. BATIMENTO
+# 2. NOME APARECENDO LETRA POR LETRA
+# ======================
+nome = "ARIEL"
+nome_parcial = ""
+
+for letra in nome:
+    nome_parcial += letra
+    render(nome_parcial)
+    time.sleep(0.4)
+
+# ======================
+# 3. BATIMENTO COM NOME
 # ======================
 while True:
     for scale in [1.0, 1.18, 1.0]:
-        html = "<div style='text-align:center; line-height:1;'>"
-
-        for row in reversed(grid):
-            html += "".join(
-                f"<span class='neon-heart' style='font-size:{int(16*scale)}px'>{cell}</span>"
-                for cell in row
-            )
-            html += "<br>"
-
-        html += "<br>"
-
-        for row in nome_display:
-            html += "".join(f"<span class='neon-green' style='font-size:18px'>{cell}</span>" for cell in row)
-            html += "<br>"
-
-        html += "</div>"
-
-        placeholder.markdown(html, unsafe_allow_html=True)
+        render(nome, scale)
         time.sleep(0.25)
