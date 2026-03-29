@@ -5,24 +5,25 @@ import time
 
 st.set_page_config(page_title="Para você 💜", layout="centered")
 
-# Estilo
+# Fundo preto + texto rosa FORÇADO
 st.markdown(
     """
     <style>
     .stApp {
         background-color: black;
     }
-    h1 {
-        color: #ff4da6;
+    .titulo {
+        color: #ff4da6 !important;
         text-align: center;
-        font-size: 40px;
+        font-size: 42px;
+        font-weight: bold;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-st.markdown("<h1>Para você meu bem &lt;3</h1>", unsafe_allow_html=True)
+st.markdown('<div class="titulo">Para você meu bem &lt;3</div>', unsafe_allow_html=True)
 
 # Função do coração
 def heart(t):
@@ -38,18 +39,17 @@ def heart(t):
 placeholder = st.empty()
 
 t = np.linspace(0, 2 * np.pi, 1000)
-
-# Animação contínua com seno (batimento natural)
 frame = 0
 
+# Loop de animação real
 while True:
-    scale = 1 + 0.15 * np.sin(frame)
+    scale = 1 + 0.2 * np.sin(frame)
 
     x, y = heart(t)
 
     fig, ax = plt.subplots()
 
-    ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
+    ax.plot(x * scale, y * scale, color="#b266ff", linewidth=5)
 
     ax.set_aspect('equal')
     ax.axis("off")
@@ -59,5 +59,5 @@ while True:
 
     placeholder.pyplot(fig)
 
-    frame += 0.2
+    frame += 0.25
     time.sleep(0.03)
