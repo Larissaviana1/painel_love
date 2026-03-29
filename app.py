@@ -1,54 +1,41 @@
 import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
 
 st.set_page_config(page_title="Para você ❤️", layout="centered")
 
-st.markdown("""
-<style>
-body {
-    background-color: #0a0a0a;
-    color: white;
-    text-align: center;
-}
+st.markdown("<h2 style='text-align:center;'>Para você 💖</h2>", unsafe_allow_html=True)
 
-.container {
-    margin-top: 100px;
-}
+# Gerar pontos do coração
+t = np.linspace(0, 2*np.pi, 800)
 
-.heart {
-    font-size: 120px;
-    animation: pulse 1.2s infinite;
-    color: #ff4d6d;
-    text-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
-}
+x = 16 * np.sin(t)**3
+y = (13 * np.cos(t)
+     - 5 * np.cos(2*t)
+     - 2 * np.cos(3*t)
+     - np.cos(4*t))
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.3); }
-    100% { transform: scale(1); }
-}
+# Plot
+fig, ax = plt.subplots()
 
-.texto {
-    font-size: 28px;
-    margin-top: 30px;
-    animation: fadeIn 3s ease-in-out;
-}
+# Simular efeito LED com vários pontos
+for i in range(10):
+    ax.scatter(
+        x + np.random.normal(0, 0.1, len(x)),
+        y + np.random.normal(0, 0.1, len(y)),
+        s=10,
+        alpha=0.6
+    )
 
-.subtexto {
-    font-size: 18px;
-    margin-top: 15px;
-    color: #ccc;
-    animation: fadeIn 5s ease-in-out;
-}
+# Cor e estilo
+ax.set_facecolor("black")
+fig.patch.set_facecolor("black")
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-</style>
+ax.axis('off')
 
-<div class="container">
-    <div class="heart">❤️</div>
-    <div class="texto">Eu te amo 💖</div>
-    <div class="subtexto">Cada momento com você é especial</div>
-</div>
-""", unsafe_allow_html=True)
+st.pyplot(fig)
+
+st.markdown(
+    "<h3 style='text-align:center; color:#ff4d6d;'>Eu te amo 💕</h3>",
+    unsafe_allow_html=True
+)
