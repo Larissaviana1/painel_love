@@ -1,68 +1,54 @@
 import streamlit as st
-import numpy as np
 
-st.set_page_config(page_title="Para você 💜", layout="centered")
+st.set_page_config(page_title="Para você ❤️", layout="centered")
 
-# ======================
-# ESTILO (FUNDO PRETO + TEXTO)
-# ======================
 st.markdown("""
 <style>
-.stApp {
-    background-color: black;
+body {
+    background-color: #0a0a0a;
+    color: white;
     text-align: center;
 }
 
-.titulo {
-    color: white;
-    font-size: 32px;
-    margin-bottom: 20px;
+.container {
+    margin-top: 100px;
 }
 
-.nome {
-    color: #b266ff;
-    font-size: 36px;
-    margin-top: 25px;
-    letter-spacing: 6px;
+.heart {
+    font-size: 120px;
+    animation: pulse 1.2s infinite;
+    color: #ff4d6d;
+    text-shadow: 0 0 20px #ff4d6d, 0 0 40px #ff4d6d;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
+
+.texto {
+    font-size: 28px;
+    margin-top: 30px;
+    animation: fadeIn 3s ease-in-out;
+}
+
+.subtexto {
+    font-size: 18px;
+    margin-top: 15px;
+    color: #ccc;
+    animation: fadeIn 5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 </style>
+
+<div class="container">
+    <div class="heart">❤️</div>
+    <div class="texto">Eu te amo 💖</div>
+    <div class="subtexto">Cada momento com você é especial</div>
+</div>
 """, unsafe_allow_html=True)
-
-# ======================
-# TEXTO SUPERIOR
-# ======================
-st.markdown("<div class='titulo'>Para você meu bem</div>", unsafe_allow_html=True)
-
-# ======================
-# GERAR CORAÇÃO (CONTORNO)
-# ======================
-size = 40
-x = np.linspace(-1.5, 1.5, size)
-y = np.linspace(-1.5, 1.5, size)
-
-X, Y = np.meshgrid(x, y)
-
-F = (X**2 + Y**2 - 1)**3 - X**2 * Y**3
-
-# contorno do coração
-border = np.abs(F) < 0.02
-
-# construir HTML
-html = "<div style='line-height:1;'>"
-
-for i in range(size-1, -1, -1):
-    for j in range(size):
-        if border[i][j]:
-            html += "<span style='font-size:18px;'>💜</span>"
-        else:
-            html += "<span style='font-size:18px;'>⠀</span>"
-    html += "<br>"
-
-html += "</div>"
-
-st.markdown(html, unsafe_allow_html=True)
-
-# ======================
-# TEXTO INFERIOR
-# ======================
-st.markdown("<div class='nome'>ARIEL 💜</div>", unsafe_allow_html=True)
