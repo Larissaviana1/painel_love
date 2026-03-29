@@ -3,7 +3,7 @@ import numpy as np
 import time
 import random
 
-st.set_page_config(page_title="Para você ❤️", layout="centered")
+st.set_page_config(page_title="Para você meu bem ❤️", layout="centered")
 
 placeholder = st.empty()
 
