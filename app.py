@@ -6,16 +6,16 @@ import random
 st.set_page_config(page_title="Para você 💚", layout="centered")
 
 # ======================
-# FUNDO PRETO REAL
+# FUNDO PRETO + NEON
 # ======================
 st.markdown("""
 <style>
 .stApp {
-    background-color: #000000;
+    background-color: black;
 }
 
 html, body {
-    background-color: #000000;
+    background-color: black;
 }
 
 .neon-heart {
@@ -51,7 +51,7 @@ heart = (X**2 + Y**2 - 1)**3 - X**2 * Y**3 <= 0
 grid = [["⠀" for _ in range(size)] for _ in range(size)]
 
 # ======================
-# 1. CORAÇÃO APARECE INSTANTE
+# 1. CORAÇÃO APARECE DE UMA VEZ
 # ======================
 for i in range(size):
     for j in range(size):
@@ -69,14 +69,14 @@ placeholder.markdown(html, unsafe_allow_html=True)
 time.sleep(1)
 
 # ======================
-# MATRIZ DO NOME
+# MATRIZ DO NOME (AJUSTADA)
 # ======================
 letters = {
-    "A": [" 1 ","1 1","111","1 1","1 1"],
-    "R": ["11 ","1 1","11 ","1 1","1 1"],
+    "A": [" 11 ","1  1","1111","1  1","1  1"],
+    "R": ["111 ","1  1","111 ","1 1 ","1  1"],
     "I": ["111"," 1 "," 1 "," 1 ","111"],
-    "E": ["111","1  ","111","1  ","111"],
-    "L": ["1  ","1  ","1  ","1  ","111"]
+    "E": ["1111","1   ","111 ","1   ","1111"],
+    "L": ["1   ","1   ","1   ","1   ","1111"]
 }
 
 nome = "ARIEL"
@@ -96,7 +96,7 @@ random.shuffle(pos_nome)
 nome_display = [["⠀" for _ in range(len(nome_matrix[0]))] for _ in range(len(nome_matrix))]
 
 # ======================
-# 2. NOME APARECENDO AOS POUCOS
+# 2. NOME APARECENDO
 # ======================
 for r, c in pos_nome:
     nome_display[r][c] = "💚"
