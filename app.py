@@ -6,7 +6,7 @@ import time
 # Configuração da página
 st.set_page_config(page_title="Para você 💜", layout="centered")
 
-# Fundo preto e texto estilizado
+# Fundo preto e texto rosa
 st.markdown(
     """
     <style>
@@ -14,7 +14,7 @@ st.markdown(
         background-color: black;
     }
     h1 {
-        color: #d291ff;
+        color: #ff4da6;
         text-align: center;
         font-size: 40px;
     }
