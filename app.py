@@ -1,62 +1,46 @@
 import streamlit as st
 import numpy as np
-import matplotlib.pyplot as plt
 import time
 
-st.set_page_config(page_title="Para você meu bem ❤️", layout="centered")
+st.set_page_config(page_title="Para você ❤️", layout="centered")
 
-st.markdown("<h2 style='text-align:center;'>Para você meu bem 💖</h2>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align:center;'>Para você 💖</h2>", unsafe_allow_html=True)
 
-# Placeholder para atualizar gráfico
 placeholder = st.empty()
 
-# Curva do coração
-t = np.linspace(0, 2*np.pi, 800)
+# grid
+size = 30
+x = np.linspace(-1.5, 1.5, size)
+y = np.linspace(-1.5, 1.5, size)
 
-base_x = 16 * np.sin(t)**3
-base_y = (13 * np.cos(t)
-          - 5 * np.cos(2*t)
-          - 2 * np.cos(3*t)
-          - np.cos(4*t))
+X, Y = np.meshgrid(x, y)
 
-# Animação
+# equação do coração
+heart = (X**2 + Y**2 - 1)**3 - X**2 * Y**3 <= 0
+
 for frame in range(1000):
-    
-    # efeito de batimento
-    scale = 1 + 0.05 * np.sin(frame * 0.2)
-    
-    x = base_x * scale
-    y = base_y * scale
+    html = "<div style='text-align:center; line-height:1;'>"
 
-    fig, ax = plt.subplots()
+    for i in range(size):
+        for j in range(size):
+            if heart[i][j]:
+                
+                # efeito de animação (batendo)
+                if (i + j + frame) % 6 < 3:
+                    html += "<span style='font-size:16px;'>❤️</span>"
+                else:
+                    html += "<span style='font-size:16px;'>💖</span>"
+            else:
+                html += "<span style='font-size:16px;'>⠀</span>"
 
-    # cor dinâmica (RGB suave)
-    r = (np.sin(frame * 0.1) + 1) / 2
-    g = (np.sin(frame * 0.1 + 2) + 1) / 2
-    b = (np.sin(frame * 0.1 + 4) + 1) / 2
+        html += "<br>"
 
-    color = (r, g, b)
+    html += "</div>"
 
-    # efeito LED (vários pontos com ruído)
-    for _ in range(6):
-        ax.scatter(
-            x + np.random.normal(0, 0.1, len(x)),
-            y + np.random.normal(0, 0.1, len(y)),
-            s=8,
-            color=color,
-            alpha=0.7
-        )
-
-    ax.set_facecolor("black")
-    fig.patch.set_facecolor("black")
-    ax.axis('off')
-
-    placeholder.pyplot(fig)
-    plt.close(fig)
-
-    time.sleep(0.05)
+    placeholder.markdown(html, unsafe_allow_html=True)
+    time.sleep(0.15)
 
 st.markdown(
-    "<h3 style='text-align:center; color:#ff4d6d;'>Eu te amo 💕</h3>",
+    "<h3 style='text-align:center;'>Eu te amo 💕</h3>",
     unsafe_allow_html=True
 )
