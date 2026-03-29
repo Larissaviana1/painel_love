@@ -1,61 +1,63 @@
 import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+import time
 
 st.set_page_config(page_title="Para você 💜", layout="centered")
 
-st.markdown("""
-<style>
-body {
-    background-color: black;
-}
+# Estilo
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-color: black;
+    }
+    h1 {
+        color: #ff4da6;
+        text-align: center;
+        font-size: 40px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
-}
+st.markdown("<h1>Para você meu bem &lt;3</h1>", unsafe_allow_html=True)
 
-/* Texto rosa */
-.texto {
-    color: #ff4da6;
-    font-size: 42px;
-    margin-bottom: 40px;
-}
+# Função do coração
+def heart(t):
+    x = 16 * np.sin(t)**3
+    y = (
+        13 * np.cos(t)
+        - 5 * np.cos(2 * t)
+        - 2 * np.cos(3 * t)
+        - np.cos(4 * t)
+    )
+    return x, y
 
-/* Coração */
-.heart {
-    width: 120px;
-    height: 120px;
-    background-color: #b266ff;
-    position: relative;
-    transform: rotate(-45deg);
-}
+placeholder = st.empty()
 
-/* Partes do coração */
-.heart::before,
-.heart::after {
-    content: "";
-    width: 120px;
-    height: 120px;
-    background-color: #b266ff;
-    border-radius: 50%;
-    position: absolute;
-}
+t = np.linspace(0, 2 * np.pi, 1000)
 
-.heart::before {
-    top: -60px;
-    left: 0;
-}
+# Animação contínua com seno (batimento natural)
+frame = 0
 
-.heart::after {
-    left: 60px;
-    top: 0;
-}
-</style>
+while True:
+    scale = 1 + 0.15 * np.sin(frame)
 
-<div class="container">
-    <div class="texto">Para você meu bem &lt;3</div>
-    <div class="heart"></div>
-</div>
-""", unsafe_allow_html=True)
+    x, y = heart(t)
+
+    fig, ax = plt.subplots()
+
+    ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
+
+    ax.set_aspect('equal')
+    ax.axis("off")
+
+    fig.patch.set_facecolor('black')
+    ax.set_facecolor('black')
+
+    placeholder.pyplot(fig)
+
+    frame += 0.2
+    time.sleep(0.03)
