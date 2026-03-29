@@ -3,10 +3,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-# Configuração da página
 st.set_page_config(page_title="Para você 💜", layout="centered")
 
-# Fundo preto e texto rosa
+# Estilo
 st.markdown(
     """
     <style>
@@ -38,38 +37,27 @@ def heart(t):
 
 placeholder = st.empty()
 
-# Loop de pulsação
+t = np.linspace(0, 2 * np.pi, 1000)
+
+# Animação contínua com seno (batimento natural)
+frame = 0
+
 while True:
-    for scale in np.linspace(0.85, 1.15, 12):
-        t = np.linspace(0, 2 * np.pi, 1000)
-        x, y = heart(t)
+    scale = 1 + 0.15 * np.sin(frame)
 
-        fig, ax = plt.subplots()
+    x, y = heart(t)
 
-        ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
+    fig, ax = plt.subplots()
 
-        ax.set_aspect('equal')
-        ax.axis("off")
+    ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
 
-        fig.patch.set_facecolor('black')
-        ax.set_facecolor('black')
+    ax.set_aspect('equal')
+    ax.axis("off")
 
-        placeholder.pyplot(fig)
-        time.sleep(0.07)
+    fig.patch.set_facecolor('black')
+    ax.set_facecolor('black')
 
-    for scale in np.linspace(1.15, 0.85, 12):
-        t = np.linspace(0, 2 * np.pi, 1000)
-        x, y = heart(t)
+    placeholder.pyplot(fig)
 
-        fig, ax = plt.subplots()
-
-        ax.plot(x * scale, y * scale, color="#b266ff", linewidth=4)
-
-        ax.set_aspect('equal')
-        ax.axis("off")
-
-        fig.patch.set_facecolor('black')
-        ax.set_facecolor('black')
-
-        placeholder.pyplot(fig)
-        time.sleep(0.07)
+    frame += 0.2
+    time.sleep(0.03)
