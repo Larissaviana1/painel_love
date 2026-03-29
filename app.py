@@ -41,7 +41,29 @@ for r, c in positions:
     time.sleep(0.02)
 
 # ======================
-# 2. CORAÇÃO BATENDO
+# 2. ESCREVER "ARIEL"
+# ======================
+
+nome = "ARIEL"
+
+# posição central
+start_row = size // 2
+start_col = size // 2 - len(nome) // 2
+
+for i, letra in enumerate(nome):
+    grid[start_row][start_col + i] = f"<b style='color:white'>{letra}</b>"
+
+    html = "<div style='text-align:center; line-height:1;'>"
+    for row in reversed(grid):
+        html += "".join(f"<span style='font-size:16px'>{cell}</span>" for cell in row)
+        html += "<br>"
+    html += "</div>"
+
+    placeholder.markdown(html, unsafe_allow_html=True)
+    time.sleep(0.2)
+
+# ======================
+# 3. CORAÇÃO BATENDO
 # ======================
 while True:
     
