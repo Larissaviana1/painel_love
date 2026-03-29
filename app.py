@@ -5,6 +5,26 @@ import random
 
 st.set_page_config(page_title="Para você 💚", layout="centered")
 
+# ======================
+# ESTILO GLOBAL (NEON + FUNDO PRETO)
+# ======================
+st.markdown("""
+<style>
+body {
+    background-color: #000000;
+}
+
+.neon {
+    color: #39ff14;
+    text-shadow:
+        0 0 5px #39ff14,
+        0 0 10px #39ff14,
+        0 0 20px #39ff14,
+        0 0 40px #39ff14;
+}
+</style>
+""", unsafe_allow_html=True)
+
 placeholder = st.empty()
 
 # ======================
@@ -30,7 +50,7 @@ for r, c in positions:
 
     html = "<div style='text-align:center; line-height:1;'>"
     for row in reversed(grid):
-        html += "".join(f"<span style='font-size:16px'>{cell}</span>" for cell in row)
+        html += "".join(f"<span class='neon' style='font-size:16px'>{cell}</span>" for cell in row)
         html += "<br>"
     html += "</div>"
 
@@ -38,49 +58,18 @@ for r, c in positions:
     time.sleep(0.02)
 
 # ======================
-# 2. MATRIZ DO NOME "ARIEL"
+# NOME "ARIEL" EM LED
 # ======================
 letters = {
-    "A": [
-        " 1 ",
-        "1 1",
-        "111",
-        "1 1",
-        "1 1"
-    ],
-    "R": [
-        "11 ",
-        "1 1",
-        "11 ",
-        "1 1",
-        "1 1"
-    ],
-    "I": [
-        "111",
-        " 1 ",
-        " 1 ",
-        " 1 ",
-        "111"
-    ],
-    "E": [
-        "111",
-        "1  ",
-        "111",
-        "1  ",
-        "111"
-    ],
-    "L": [
-        "1  ",
-        "1  ",
-        "1  ",
-        "1  ",
-        "111"
-    ]
+    "A": [" 1 ","1 1","111","1 1","1 1"],
+    "R": ["11 ","1 1","11 ","1 1","1 1"],
+    "I": ["111"," 1 "," 1 "," 1 ","111"],
+    "E": ["111","1  ","111","1  ","111"],
+    "L": ["1  ","1  ","1  ","1  ","111"]
 }
 
 nome = "ARIEL"
 
-# montar grid do nome
 nome_grid = []
 for linha in range(5):
     row = ""
@@ -88,36 +77,29 @@ for linha in range(5):
         row += letters[letra][linha] + "  "
     nome_grid.append(row)
 
-# converter em matriz
-nome_matrix = []
-for linha in nome_grid:
-    nome_matrix.append(list(linha))
+nome_matrix = [list(linha) for linha in nome_grid]
 
-# posições das letras
 pos_nome = [(i, j) for i in range(len(nome_matrix)) for j in range(len(nome_matrix[0])) if nome_matrix[i][j] == "1"]
 random.shuffle(pos_nome)
 
-# grid vazio nome
 nome_display = [["⠀" for _ in range(len(nome_matrix[0]))] for _ in range(len(nome_matrix))]
 
 # ======================
-# 3. ANIMAÇÃO DO NOME
+# 2. ANIMAÇÃO DO NOME
 # ======================
 for r, c in pos_nome:
     nome_display[r][c] = "💚"
 
     html = "<div style='text-align:center; line-height:1;'>"
 
-    # coração
     for row in reversed(grid):
-        html += "".join(f"<span style='font-size:16px'>{cell}</span>" for cell in row)
+        html += "".join(f"<span class='neon' style='font-size:16px'>{cell}</span>" for cell in row)
         html += "<br>"
 
     html += "<br>"
 
-    # nome desenhado
     for row in nome_display:
-        html += "".join(f"<span style='font-size:18px'>{cell}</span>" for cell in row)
+        html += "".join(f"<span class='neon' style='font-size:18px'>{cell}</span>" for cell in row)
         html += "<br>"
 
     html += "</div>"
@@ -126,25 +108,23 @@ for r, c in pos_nome:
     time.sleep(0.04)
 
 # ======================
-# 4. CORAÇÃO BATENDO + NOME FIXO
+# 3. BATIMENTO NEON
 # ======================
 while True:
-    for scale in [1.0, 1.15, 1.0]:
+    for scale in [1.0, 1.2, 1.0]:
         html = "<div style='text-align:center; line-height:1;'>"
 
-        # coração
         for row in reversed(grid):
             html += "".join(
-                f"<span style='font-size:{int(16*scale)}px'>{cell}</span>"
+                f"<span class='neon' style='font-size:{int(16*scale)}px'>{cell}</span>"
                 for cell in row
             )
             html += "<br>"
 
         html += "<br>"
 
-        # nome fixo
         for row in nome_display:
-            html += "".join(f"<span style='font-size:18px'>{cell}</span>" for cell in row)
+            html += "".join(f"<span class='neon' style='font-size:18px'>{cell}</span>" for cell in row)
             html += "<br>"
 
         html += "</div>"
